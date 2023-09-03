@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar
+    <v-app-bar app
       color="primary"
       height="110">
       <v-spacer></v-spacer>
@@ -10,23 +10,15 @@
         height="100"
         alt="Logo do ICMC">
         <v-spacer></v-spacer>
-    </v-app-bar>
-    <v-app-bar
-      height="50">
-      <v-tabs
-        centered
-        class="ml-n9"
-        color="grey darken-1"
-      >
-        <v-tab to="/"
-        >
-        Home
-        </v-tab>
-        <v-tab to="/AboutUs"
-        >
-        About Us
-        </v-tab>
-      </v-tabs>
+        <template v-slot:extension>
+        <v-tabs centered
+          background-color="grey lighten-3"
+          color = "grey darken-2">
+          <v-tab to="/">Home</v-tab>
+
+          <v-tab to="/aboutus">About</v-tab>
+        </v-tabs>
+      </template>
     </v-app-bar>
   </div>
 </template>
