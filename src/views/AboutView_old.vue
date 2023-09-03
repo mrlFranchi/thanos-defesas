@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <v-spacer/>
     <div>
       <h1>O Projeto</h1>
       <p>
@@ -16,5 +17,6 @@
       </v-list>
 
     </div>
+    <v-spacer/>
   </div>
 </template>
