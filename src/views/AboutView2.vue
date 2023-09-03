@@ -20,6 +20,8 @@
                 text
                 style="text-transform: unset !important;"
                 outlined
+                href="https://github.com/mrlFranchi/"
+                target="_blank"
               >
                 <v-avatar size="30">
                   <img src="./../assets/github-mark.png" alt="Logo do Github">
@@ -30,6 +32,8 @@
               <v-btn
                 text
                 outlined
+                href = "https://www.linkedin.com/in/murilo-franchi/"
+                target="_blank"
               >
                 <img src="./../assets/LI-Logo.png" height = "28" alt = "LinkedIn Logo">
               </v-btn>
@@ -44,8 +48,8 @@
           min-height="70vh"
           rounded="lg"
         >
-          <!--  -->
-        </v-sheet>
+         <!--  -->
+      </v-sheet>
       </v-col>
     </v-row>
   </v-container>
