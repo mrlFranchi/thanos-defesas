@@ -2,7 +2,8 @@
   <div>
   <v-main style="padding: 0;">
     <v-app-bar
-    clipped-left>
+    clipped-left
+    clipped-right>
     <v-btn @click="drawer = !drawer">Filtros</v-btn>
 
     <v-spacer/>
@@ -17,108 +18,114 @@
     <v-navigation-drawer
       v-model="drawer"
       absolute
-      temporary
-    >
-    <v-card>
-      <v-list-group
-        :value="true"
-      >
-        <template v-slot:activator>
-          <v-list-item-title>Programas</v-list-item-title>
-        </template>
-          <v-radio-group
-          v-model="programa"
-          @click="console.log(programa)">
-            <v-radio
-              v-for="n in programas"
-              :key="n"
-              :label="`${n}`"
-              :value="n"
-              @click="click"
-            ></v-radio>
-          </v-radio-group>
-      </v-list-group>
-    </v-card>
-    <v-card>
-      <v-list-group
-        :value="true"
-      >
-        <template v-slot:activator>
-          <v-list-item-title>Cursos</v-list-item-title>
-        </template>
-          <v-radio-group
-          v-model="curso"
-          @click="console.log(curso)">
-            <v-radio
-              v-for="n in cursos"
-              :key="n"
-              :label="`${n}`"
-              :value="n"
-              @click="click"
-            ></v-radio>
-          </v-radio-group>
-      </v-list-group>
-    </v-card>
+      temporary>
+      <v-card>
+        <v-list-group
+          :value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Programas</v-list-item-title>
+          </template>
+            <v-radio-group
+            v-model="programa">
+              <v-radio
+                v-for="n in programas"
+                :key="n"
+                :label="`${n}`"
+                :value="n"
+                @click="click(programa)"
+              ></v-radio>
+            </v-radio-group>
+        </v-list-group>
+      </v-card>
+      <v-card>
+        <v-list-group
+          :value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Cursos</v-list-item-title>
+          </template>
+            <v-radio-group
+            v-model="curso">
+              <v-radio
+                v-for="n in cursos"
+                :key="n"
+                :label="`${n}`"
+                :value="n"
+                @click="click(curso)"
+              ></v-radio>
+            </v-radio-group>
+        </v-list-group>
+      </v-card>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="rightDrawer"
       absolute
       temporary
       right
+      width = "25%"
     >
-      <v-card>
-        teste
-      </v-card>
+      <CardDefesa
+      :defesa = "selectedRow"
+      />
     </v-navigation-drawer>
     <v-card>
       <v-card-title>
       </v-card-title>
       <v-data-table
-      dense
       :headers="headers"
       :items="defesas"
       :search="nome"
-      ></v-data-table>
+      @click:row="select_row"
+      >
+    </v-data-table>
     </v-card>
   </v-main>
   </div>
 </template>
 
 <script>
+import CardDefesa from '@/components/CardDefesa.vue';
+
 export default {
-  data: () => ({
-    drawer: false,
-    rightDrawer: false,
-    nome: '',
-    programas: ['Todos', 'MAT', 'CCMC', 'PIPGEs', 'PROFMAT'],
-    programa: 'Todos',
-    cursos: ['Todos', 'Mestrado', 'Doutorado', 'DD'],
-    curso: 'Todos',
-    headers: [
-      {
-        text: 'Ordem', value: 'Ordem', filterable: true,
-      },
-      {
-        text: 'Nome', value: 'Nome', filterable: true,
-      },
-      {
-        text: 'Curso',
-        value: 'Curso',
-      },
-      {
-        text: 'Programa',
-        value: 'Programa',
-      },
-      {
-        text: 'Data', value: 'Data', filterable: true,
-      },
-    ],
-    defesas: undefined,
-    filtered: undefined,
-  }),
+  data() {
+    return {
+      drawer: false,
+      rightDrawer: false,
+      nome: '',
+      programas: ['Todos', 'MAT', 'CCMC', 'PIPGEs', 'PROFMAT'],
+      programa: 'Todos',
+      cursos: ['Todos', 'Mestrado', 'Doutorado', 'DD'],
+      curso: 'Todos',
+      selectedRow: undefined,
+      headers: [
+        {
+          text: 'Nome', value: 'Nome', filterable: true,
+        },
+        {
+          text: 'Curso',
+          value: 'Curso',
+          filterable: true,
+          filter: (value) => (this.curso === 'Todos' || value === this.curso),
+        },
+        {
+          text: 'Programa',
+          value: 'Programa',
+          filterable: true,
+          filter: (value) => (this.programa === 'Todos' || value === this.programa),
+        },
+      ],
+      defesas: undefined,
+      filtered: undefined,
+    };
+  },
   methods: {
-    click() {
-      console.log(this.programa);
+    click(c) {
+      console.log(c);
+    },
+    select_row(r) {
+      this.rightDrawer = true;
+      this.selectedRow = r;
     },
     async filter() {
       this.filtered = [];
@@ -140,7 +147,9 @@ export default {
   },
   beforeMount() {
     this.get_data();
-    // this.filter();
+  },
+  components: {
+    CardDefesa,
   },
 };
 </script>
