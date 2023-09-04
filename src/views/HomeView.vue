@@ -78,6 +78,9 @@
       :search="nome"
       @click:row="select_row"
       >
+      <template v-slot:[`item.Data`]="{ item }">
+        <span>{{ item.Data.toLocaleDateString() }}</span>
+      </template>
     </v-data-table>
     </v-card>
   </v-main>
@@ -148,6 +151,11 @@ export default {
       const response = await fetch(url);
       this.defesas = await response.json();
       this.defesas = this.defesas.items;
+      this.defesas.forEach((e) => {
+        const data = e.Data.split('/');
+        e.Data = new Date(data[2], data[1] - 1, data[0]);
+        // e.Data = e.Date.toLocaleDateString();
+      });
     },
 
   },
