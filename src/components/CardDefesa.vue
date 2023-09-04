@@ -7,6 +7,9 @@
         <v-card-subtitle>
           {{ curso }} em {{ programa }} na data de {{ defesa.Data }}
         </v-card-subtitle>
+        <v-card-text v-show="orientador">
+          Orientador: {{ defesa.Orientador }}
+        </v-card-text>
         <v-card-actions>
           <v-btn>
             <img src="./../assets/Dedalus.png"
@@ -22,6 +25,7 @@ export default {
     return {
       programa: '',
       curso: '',
+      orientador: false,
     };
   },
   methods: {
@@ -50,6 +54,7 @@ export default {
         default:
           this.programa = this.defesa.Programa;
       }
+      this.orientador = !(this.defesa.Orientador === '');
     },
   },
   props: [
