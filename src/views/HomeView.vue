@@ -114,6 +114,12 @@ export default {
           filterable: true,
           filter: (value) => (this.programa === 'Todos' || value === this.programa),
         },
+        {
+          text: 'Orientador', value: 'Orientador', filterable: false,
+        },
+        {
+          text: 'Data', value: 'Data', filterable: false,
+        },
       ],
       defesas: undefined,
       filtered: undefined,
