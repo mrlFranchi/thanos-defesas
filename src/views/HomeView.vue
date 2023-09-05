@@ -71,6 +71,7 @@
     </v-navigation-drawer>
     <v-card>
       <v-card-title>
+        Filtrando por curso: {{ this.curso }}, do programa: {{ this.programa }}
       </v-card-title>
       <v-data-table
       :headers="headers"
