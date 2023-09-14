@@ -5,7 +5,7 @@
             {{  defesa.Nome  }}
         </v-card-title>
         <v-card-subtitle>
-          {{ curso }} em {{ programa }} na data de {{ defesa.Data }}
+          {{ curso }} em {{ programa }} na data de {{ defesa.Data.toLocaleDateString() }}
         </v-card-subtitle>
         <v-card-text v-show="orientador">
           Orientador: {{ defesa.Orientador }}

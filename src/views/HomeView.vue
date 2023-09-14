@@ -69,7 +69,7 @@
       :defesa = "selectedRow"
       />
     </v-navigation-drawer>
-    <v-card>
+    <v-card height = "800px">
       <v-card-title>
         Filtrando por curso: {{ this.curso }}, do programa: {{ this.programa }}
       </v-card-title>
